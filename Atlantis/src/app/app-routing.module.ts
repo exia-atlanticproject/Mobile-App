@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
-import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
-
+import { RouterModule, Routes } from "@angular/router";
+import { AuthGuard } from "./guards/auth.guard";
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   {
@@ -11,13 +11,15 @@ const routes: Routes = [
     path: "register",
     loadChildren: "./public/register/register.module#RegisterPageModule"
   },
-  { path: 'dashboard', loadChildren: './member/dashboard/dashboard.module#DashboardPageModule' }
+  {
+    path: "members",
+    canActivate: [AuthGuard],
+    loadChildren: "./members/member-routing.module#MemberRoutingModule"
+  }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

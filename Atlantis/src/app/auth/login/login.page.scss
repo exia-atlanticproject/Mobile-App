@@ -8,3 +8,30 @@ ion-button {
 a {
   color: #fff;
 }
+ion-spinner {
+  position: absolute; /* postulat de départ */
+  top: 50%;
+  left: 50%; /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%);
+  color: white;
+}
+ion-text {
+  position: absolute; /* postulat de départ */
+  top: 58%;
+  left: 50%; /* à 50%/50% du parent référent */
+  transform: translate(-50%, -50%);
+  color: white;
+}
+/*
+ion-spinner {
+  position: fixed;
+  z-index: 999;
+  width: 40px !important;
+  height: 40px !important;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}*/

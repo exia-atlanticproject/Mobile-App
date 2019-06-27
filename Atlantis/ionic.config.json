@@ -3,5 +3,15 @@
   "integrations": {
     "cordova": {}
   },
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost:8090"
+    },
+    {
+      "path": "/token",
+      "proxyUrl": "https://atlantisproject.b2clogin.com/atlantisproject.onmicrosoft.com/oauth2/v2.0/token?p=b2c_1_signuporsignin"
+    }
+  ],
   "type": "angular"
 }

@@ -15,7 +15,8 @@ const routes: Routes = [
     path: "members",
     //canActivate: [AuthGuard],
     loadChildren: "./members/member-routing.module#MemberRoutingModule"
-  }
+  },
+  { path: 'webview', loadChildren: './auth/webview/webview.module#WebviewPageModule' }
 ];
 
 @NgModule({

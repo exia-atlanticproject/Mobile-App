@@ -1,12 +1,36 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header color="primary">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="logout()">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>My Dashboard</ion-title>
+    <ion-title>Atlantis App</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding> </ion-content>
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div text-center>
+          <h3>Welcome to your Dashboard</h3>
+        </div>
+        <div padding>
+          <ion-button
+            class="button-content-dashboard"
+            size="large"
+            type="submit"
+            expand="block"
+            >My devices <ion-icon class="device-icon" name="wifi"></ion-icon
+          ></ion-button>
+        </div>
+        <div padding>
+          <ion-button size="large" type="submit" expand="block"
+            >Nothing <ion-icon name="wifi"></ion-icon
+          ></ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

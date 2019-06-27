@@ -2,14 +2,10 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "./guards/auth.guard";
 const routes: Routes = [
-  { path: "", redirectTo: "login", pathMatch: "full" },
+  { path: "", redirectTo: "webview", pathMatch: "full" },
   {
     path: "login",
     loadChildren: "./auth/login/login.module#LoginPageModule"
-  },
-  {
-    path: "register",
-    loadChildren: "./auth/register/register.module#RegisterPageModule"
   },
   {
     path: "members",

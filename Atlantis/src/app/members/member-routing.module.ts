@@ -5,7 +5,8 @@ const routes: Routes = [
   {
     path: "dashboard",
     loadChildren: "./dashboard/dashboard.module#DashboardPageModule"
-  }
+  },
+  { path: 'device', loadChildren: './device/device.module#DevicePageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

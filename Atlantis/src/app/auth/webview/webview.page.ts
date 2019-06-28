@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
+import {Component, NgZone, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+
 
 import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @Component({
   selector: 'app-webview',
@@ -26,29 +28,43 @@ export class WebviewPage implements OnInit {
     presentationstyle: 'pagesheet', // iOS only
     fullscreen: 'yes' // Windows only
   };
-  constructor(private iab: InAppBrowser) {}
 
+  isConnected: boolean;
+  isLoading: false;
+  constructor(private iab: InAppBrowser, private http: HTTP, private router: Router, private ngZone: NgZone) {}
+
+  public get(url, params?: any, options: any = {}) {
+    const responseData = this.http.get(url, params, {})
+      .then(resp => options.responseType === 'text' ? resp.data : JSON.parse(resp.data));
+    return responseData;
+  }
+
+  public post(url, params?: any, options: any = {}) {
+    const responseData = this.http.post(url, params, {})
+      .then(resp => options.responseType === 'text' ? resp.data : JSON.parse(resp.data));
+    return responseData;
+  }
+
+  async navigate() {
+    await this.ngZone.run(async () => await this.router.navigateByUrl('/members/dashboard'));
+  }
   async ngOnInit() {
-      console.log('lol');
-
       const target = '_self';
       let code: string = null;
-      const { data } = await axios.get('http://localhost:8090/auth');
+      const data = await this.get('http://localhost:8090/auth', {}, {});
       const browser = this.iab.create(data.url, target, 'hideurlbar=yes');
-
       browser.on('loadstart').subscribe(async e => {
-      console.log('I am here too');
       if (e.url.indexOf('?code=') !== -1) {
           code = e.url.slice(e.url.indexOf('?code=') + '?code='.length);
           browser.close();
 
-          const params = new URLSearchParams();
-          const { data: token } = await axios.get('http://localhost:8090/login', {
-              params: {
-                  code
-              }
-          });
-          console.log(token);
+          const { id_token } = await this.get('http://localhost:8090/login', { code
+          }, {});
+
+          this.http.setHeader('localhost', 'Authorization', `Bearer ${id_token}`);
+          this.isConnected = true;
+          this.isLoading = false;
+          this.navigate();
     }
     });
   }

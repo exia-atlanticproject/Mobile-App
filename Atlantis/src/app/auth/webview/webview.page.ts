@@ -10,6 +10,7 @@ import { InAppBrowser, InAppBrowserObject } from '@ionic-native/in-app-browser/n
 export class WebviewPage implements OnInit {
   options: {
     location: 'yes', // Or 'no'
+    hideurlbar: 'yes',
     hidden: 'yes', // Or  'yes'
     clearcache: 'yes',
     clearsessioncache: 'yes',
@@ -25,24 +26,29 @@ export class WebviewPage implements OnInit {
     presentationstyle: 'pagesheet', // iOS only
     fullscreen: 'yes' // Windows only
   };
-
-  iab: null;
-  constructor(private iab: InAppBrowser) {
-    this.iab = iab;
-  }
+  constructor(private iab: InAppBrowser) {}
 
   async ngOnInit() {
-    const target = '_self';
-    const { data: url } = await axios.get('http://localhost:8090/auth');
-    const browser = this.iab.create(url, target, this.options);
-    console.log('I am here');
+      console.log('lol');
 
-    browser.on('loadstart', e => {
+      const target = '_self';
+      let code: string = null;
+      const { data } = await axios.get('http://localhost:8090/auth');
+      const browser = this.iab.create(data.url, target, 'hideurlbar=yes');
+
+      browser.on('loadstart').subscribe(async e => {
       console.log('I am here too');
-
       if (e.url.indexOf('?code=') !== -1) {
-        const token = e.url.slice(e.url.indexOf('?code=') + '?code='.length);
-        browser.close();
+          code = e.url.slice(e.url.indexOf('?code=') + '?code='.length);
+          browser.close();
+
+          const params = new URLSearchParams();
+          const { data: token } = await axios.get('http://localhost:8090/login', {
+              params: {
+                  code
+              }
+          });
+          console.log(token);
     }
     });
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "src/app/services/authentication.service";
+import { DevicePage } from "./../device/device.page";
+import { NavController } from "@ionic/angular";
 
 @Component({
   selector: "app-dashboard",
@@ -7,10 +8,10 @@ import { AuthenticationService } from "src/app/services/authentication.service";
   styleUrls: ["./dashboard.page.scss"]
 })
 export class DashboardPage implements OnInit {
-  constructor(private authService: AuthenticationService) {}
+  constructor(public navCtrl: NavController) {}
 
   ngOnInit() {}
-  logout() {
-    this.authService.logout();
+  openDevices() {
+    this.navCtrl.navigateForward("members/device");
   }
 }

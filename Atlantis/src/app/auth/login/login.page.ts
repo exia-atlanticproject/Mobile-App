@@ -1,32 +1,90 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import axios from 'axios';
+import { Component, NgZone, OnInit } from "@angular/core";
+import { NavController } from "@ionic/angular";
+import { Router } from "@angular/router";
+import axios from "axios";
+import {
+  InAppBrowser,
+  InAppBrowserObject
+} from "@ionic-native/in-app-browser/ngx";
+import { HTTP } from "@ionic-native/http/ngx";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  selector: "app-login",
+  templateUrl: "./login.page.html",
+  styleUrls: ["./login.page.scss"]
 })
 export class LoginPage implements OnInit {
-  constructor(private router: Router) {}
-  ngOnInit() {
-    const stateUrl = new URLSearchParams(this.router.url);
+  options: {
+    location: "yes"; // Or 'no'
+    hideurlbar: "yes";
+    hidden: "yes"; // Or  'yes'
+    clearcache: "yes";
+    clearsessioncache: "yes";
+    zoom: "yes"; // Android only ,shows browser zoom controls
+    hardwareback: "yes";
+    mediaPlaybackRequiresUserAction: "no";
+    shouldPauseOnSuspend: "no"; // Android only
+    closebuttoncaption: "Close"; // iOS only
+    disallowoverscroll: "no"; // iOS only
+    toolbar: "yes"; // iOS only
+    enableViewportScale: "no"; // iOS only
+    allowInlineMediaPlayback: "no"; // iOS only
+    presentationstyle: "pagesheet"; // iOS only
+    fullscreen: "yes"; // Windows only
+  };
+  isConnected: boolean;
+  isLoading: false;
+  constructor(
+    private router: Router,
+    private http: HTTP,
+    private iab: InAppBrowser,
+    private ngZone: NgZone
+  ) {}
+  public get(url, params?: any, options: any = {}) {
+    const responseData = this.http
+      .get(url, params, {})
+      .then(resp =>
+        options.responseType === "text" ? resp.data : JSON.parse(resp.data)
+      );
+    return responseData;
+  }
+  /*  public post(url, params?: any, options: any = {}) {
+    const responseData = this.http
+      .post(url, params, {})
+      .then(resp =>
+        options.responseType === "text" ? resp.data : JSON.parse(resp.data)
+      );
+    return responseData;
+  }*/
+  async navigate() {
+    await this.ngZone.run(
+      async () => await this.router.navigateByUrl("/members/dashboard")
+    );
+  }
 
-    const params = new URLSearchParams();
-    params.append('client_id', '27fb84fe-4baf-4b6b-bfe7-f2d0638f2790');
-    params.append('client_secret', 'Zg2^04#WjA#h%6Q{]eK53J&`');
-    params.append('redirect_uri', 'urn:ietf:wg:oauth:2.0:oo');
-    params.append('grant_type', 'authorization_code');
-    params.append('code', stateUrl.get('code'));
-    params.append('scope', 'openid');
-    params.append('nonce', '1234');
+  async ngOnInit() {
+    const target = "_self";
+    let code: string = null;
+    const data = await this.get("http://localhost:8090/auth", {}, {});
+    const browser = this.iab.create(data, target, "hideurlbar=yes");
+    browser.on("loadstart").subscribe(async e => {
+      if (e.url.indexOf("?code=") !== -1) {
+        code = e.url.slice(e.url.indexOf("?code=") + "?code=".length);
+        browser.close();
 
-    axios
-      .post('/token', params)
-      .then(response => response.data)
-      .then(data => {
-        console.log(data);
-      });
+        const { id_token } = await this.get(
+          "http://localhost:8090/login",
+          { code },
+          {}
+        );
+
+        this.http.setHeader("localhost", "Authorization", `Bearer ${id_token}`);
+        this.isConnected = true;
+        this.isLoading = false;
+        this.navigate();
+
+        //this.router.navigate(["members"]);
+      }
+    });
   }
 }

@@ -6,10 +6,22 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./device.page.scss"]
 })
 export class DevicePage implements OnInit {
-  public items: string[];
+  private litsItems: any;
   constructor() {
-    this.items = ["Jeje", "Nico"];
+    this.litsItems = [
+      {
+        title: "Test",
+        desc: "First"
+      },
+      {
+        title: "Tests",
+        desc: "Two"
+      }
+    ];
   }
 
   ngOnInit() {}
+  ShowDesc(descs: any) {
+    console.log(descs);
+  }
 }

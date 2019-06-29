@@ -1,13 +1,18 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>device</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Devices</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
-    <ion-item>
-      <ion-label>{{ item }}</ion-label>
+    <ion-item *ngFor="let item of litsItems">
+      {{ item.title }}
+      <ion-button slot="end" (click)="ShowDesc(item.desc)">
+        Calculation</ion-button
+      >
     </ion-item>
   </ion-list>
 </ion-content>

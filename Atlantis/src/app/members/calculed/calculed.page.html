@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Previous calculation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+    <ion-item
+      (click)="openPreviousCalculs(item.IdCalculation)"
+      *ngFor="let item of litsDevices"
+    >
+      <div style="justify-content: space-between; display: flex; width: 100%">
+        <div style="width:89%">
+          <div class="containerItemCalculation">
+            <div style="display: flex">
+              <h5>{{ item.title }}</h5>
+            </div>
+            <div>
+              Device used : {{ item.deviceName }} at : {{ item.dateTime }}
+            </div>
+          </div>
+        </div>
+        <div style="margin: auto">
+          <ion-fab-button (click)="openPreviousCalculs(item.IdCalculation)">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </div>
+      </div>
+    </ion-item>
+  </ion-content>
+</ion-content>

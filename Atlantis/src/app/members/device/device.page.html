@@ -8,11 +8,8 @@
 </ion-header>
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of litsItems">
-      {{ item.title }}
-      <ion-button slot="end" (click)="ShowDesc(item.desc)">
-        Calculation</ion-button
-      >
+    <ion-item (click)="openModal(item.id)" *ngFor="let item of litsDevices">
+      {{ item.name }}
     </ion-item>
   </ion-list>
 </ion-content>

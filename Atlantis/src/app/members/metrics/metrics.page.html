@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>metrics</ion-title>
+  <ion-toolbar text-center>
+    <ion-title> Device {{ paramID }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let item of listMetrics">
+      <h5>{{ item.metric }}</h5>
+      {{ item.data }}
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col text-center>
+      <ion-button (click)="closeModal()">Close metrics page</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

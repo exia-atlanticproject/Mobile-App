@@ -7,9 +7,28 @@ const routes: Routes = [
     path: "dashboard",
     loadChildren: "./dashboard/dashboard.module#DashboardPageModule"
   },
-  { path: "device", loadChildren: "./device/device.module#DevicePageModule" },  { path: 'metrics', loadChildren: './metrics/metrics.module#MetricsPageModule' },
-  { path: 'chart', loadChildren: './chart/chart.module#ChartPageModule' }
-
+  { path: "device", loadChildren: "./device/device.module#DevicePageModule" },
+  {
+    path: "metrics",
+    loadChildren: "./metrics/metrics.module#MetricsPageModule"
+  },
+  {
+    path: "chart/:deviceId",
+    loadChildren: "./chart/chart.module#ChartPageModule"
+  },
+  {
+    path: "command",
+    loadChildren: "./command/command.module#CommandPageModule"
+  },
+  {
+    path: "calculed",
+    loadChildren: "./calculed/calculed.module#CalculedPageModule"
+  },
+  {
+    path: "previous-calculs/:calculationId",
+    loadChildren:
+      "./previous-calculs/previous-calculs.module#PreviousCalculsPageModule"
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

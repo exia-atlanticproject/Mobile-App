@@ -1,3 +1,6 @@
+<link rel="icon" type="image/svg" href="assets/icon/walkie-talkie.svg" />
+<link rel="icon" type="image/svg" href="assets/icon/calculation.svg" />
+
 <ion-header color="primary">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -5,26 +8,62 @@
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Atlantis App</ion-title>
+    <ion-title text-center style="padding-right: 68px">Atlantis App</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
-    <ion-row justify-content-center>
-      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-        <div text-center>
-          <h3>Welcome to your Dashboard</h3>
-        </div>
-        <div padding>
+    <div text-center>
+      <h4>Welcome to your Dashboard</h4>
+    </div>
+    <div class="OpenDeviceRow">
+      <ion-row (click)="openDevices()" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-icon
+            large
+            src="assets/walkie-talkie.svg"
+            style="    height: 60px;
+    width: 100%;"
+          >
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="openDevices()" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <ion-button
+            small
             class="button-contem nt-dashboard"
-            size="large"
             (click)="openDevices()"
-            >My devices <ion-icon class="device-icon" name="wifi"></ion-icon
-          ></ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
+            >Devices</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+  <ion-grid>
+    <div class="OpenDeviceRow">
+      <ion-row (click)="openPreviousCalculs()" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-icon
+            large
+            src="assets/calculation.svg"
+            style="    height: 60px;
+      width: 100%;"
+          >
+          </ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="openPreviousCalculs()" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <ion-button
+            small
+            class="button-contem nt-dashboard"
+            (click)="openPreviousCalculs()"
+            >Calculations</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 </ion-content>

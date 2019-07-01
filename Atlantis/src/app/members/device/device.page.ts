@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ModalDevicePage } from "../modal-device/modal-device.page";
+import { ModalController } from "@ionic/angular";
+import { HTTP } from "@ionic-native/http/ngx";
 
 @Component({
   selector: "app-device",
@@ -6,22 +9,49 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./device.page.scss"]
 })
 export class DevicePage implements OnInit {
-  private litsItems: any;
-  constructor() {
-    this.litsItems = [
+  dataReturned: any;
+  private litsDevices: any;
+  paramData;
+
+  constructor(private modalController: ModalController, private http: HTTP) {
+    this.litsDevices = [
       {
-        title: "Test",
-        desc: "First"
+        name: "Nancy",
+        id: 57
       },
       {
-        title: "Tests",
-        desc: "Two"
+        name: "Metz",
+        id: 54
       }
     ];
   }
+  getDeviceByuser() {}
 
-  ngOnInit() {}
-  ShowDesc(descs: any) {
-    console.log(descs);
+  async ngOnInit() {
+    /*
+    const { device } = await this.get("http://localhost:8090/devices", {}, {});
+    console.log(device);
+    */
+  }
+
+  public get(url, params?: any, options: any = {}) {
+    const responseData = this.http
+      .get(url, params, {})
+      .then(resp =>
+        options.responseType === "text" ? resp.data : JSON.parse(resp.data)
+      );
+    return responseData;
+  }
+
+  async openModal(title: string, dataD: string) {
+    const modal = await this.modalController.create({
+      component: ModalDevicePage,
+      componentProps: {
+        paramID: 123,
+        paramTitle: "Test Title",
+        paramData: dataD
+      }
+    });
+    modal.present();
   }
 }

@@ -14,4 +14,7 @@ export class DashboardPage implements OnInit {
   openDevices() {
     this.navCtrl.navigateForward("members/device");
   }
+  openPreviousCalculs() {
+    this.navCtrl.navigateForward("members/calculed");
+  }
 }

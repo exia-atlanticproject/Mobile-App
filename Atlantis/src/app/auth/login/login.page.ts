@@ -82,8 +82,6 @@ export class LoginPage implements OnInit {
         this.isConnected = true;
         this.isLoading = false;
         this.navigate();
-
-        //this.router.navigate(["members"]);
       }
     });
   }

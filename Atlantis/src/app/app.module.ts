@@ -9,7 +9,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { IonicStorageModule } from "@ionic/storage";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import { HTTP } from "@ionic-native/http/ngx";
-
+import { ChartsModule } from "ng2-charts";
+import { ModalDevicePageModule } from "./members/modal-device/modal-device.module";
+import { MetricsPageModule } from "./members/metrics/metrics.module";
+import { CommandPageModule } from "./members/command/command.module";
+import { from } from "rxjs";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -17,8 +21,13 @@ import { HTTP } from "@ionic-native/http/ngx";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    ChartsModule,
+    ModalDevicePageModule,
+    MetricsPageModule,
+    CommandPageModule,
     IonicStorageModule.forRoot()
   ],
+  exports: [ChartsModule],
   providers: [
     StatusBar,
     SplashScreen,

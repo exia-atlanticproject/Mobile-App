@@ -1,9 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Chart</ion-title>
+    <ion-title> Device {{ paramID }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div>
+    <div>
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"
+          ></canvas>
+        </div>
+        <button
+          mat-button
+          mat-raised-button
+          color="primary"
+          (click)="randomize()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -22,4 +22,6 @@ export class CommandPage implements OnInit {
     const onClosedData: string = "Wrapped Up!";
     await this.modalController.dismiss(onClosedData);
   }
+  turnOn() {}
+  turnOff() {}
 }

@@ -4,39 +4,73 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content
-  ><form #f="ngForm" (ngSubmit)="onSubmitForm(f)">
-    <ion-list>
+<ion-content>
+  <ion-list style="height: 100%">
+    <ion-list-header><h3>Set up your calculation</h3> </ion-list-header>
+    <form style="height: 100%" (ngSubmit)="logForm()">
       <ion-item>
-        <ion-label>Heure d'allumage</ion-label>
+        <ion-label position="stacked"
+          >Title <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Type</ion-label>
+        <ion-select interface="popover">
+          <ion-select-option value="ave">Average</ion-select-option>
+          <ion-select-option value="min">Minimum</ion-select-option>
+          <ion-select-option value="max">Maximum</ion-select-option>
+          <ion-select-option value="med">Median</ion-select-option>
+          <ion-select-option value="dev">Deviation</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Granularity</ion-label>
+        <ion-select interface="popover">
+          <ion-select-option value="minute">Minutes</ion-select-option>
+          <ion-select-option value="hour">Hours</ion-select-option>
+          <ion-select-option value="day">Days</ion-select-option>
+          <ion-select-option value="week">Weeks</ion-select-option>
+          <ion-select-option value="month">Months</ion-select-option>
+          <ion-select-option value="year">Years</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-list-header><h3>Start</h3></ion-list-header>
+      <ion-item>
+        <ion-label>Hour</ion-label>
         <ion-datetime
-          displayFormat="HH:mm"
-          name="startTime"
-          [(ngModel)]="appareil.startTime"
+          displayFormat="H:mm"
+          minuteValues="0,15,30,45"
         ></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label>Heure d'extinction</ion-label>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+      </ion-item>
+      <ion-list-header><h3>End</h3></ion-list-header>
+      <ion-item>
+        <ion-label>Hour</ion-label>
         <ion-datetime
-          displayFormat="HH:mm"
-          name="endTime"
-          [(ngModel)]="appareil.endTime"
+          displayFormat="H:mm"
+          minuteValues="0,15,30,45"
         ></ion-datetime>
       </ion-item>
-    </ion-list>
-    <button
-      type="button"
-      ion-button
-      full
-      color="danger"
-      (click)="onDeleteHours()"
-    >
-      Supprimer horaires
-    </button>
-    <button type="submit" ion-button full color="secondary">
-      Enregistrer horaires
-    </button>
-  </form>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+      </ion-item>
+      <div style="height: 100%" text-center>
+        <ion-button
+          style="margin-top: 10%"
+          class="buttonSubmit"
+          ion-button
+          type="submit"
+          block
+          >Launch the operation</ion-button
+        >
+      </div>
+    </form>
+  </ion-list>
 </ion-content>
 
 <ion-footer>

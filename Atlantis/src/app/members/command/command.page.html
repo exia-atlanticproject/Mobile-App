@@ -1,10 +1,35 @@
+<link rel="icon" type="image/svg" href="assets/icon/calculation.svg" />
 <ion-header>
   <ion-toolbar>
     <ion-title> Device {{ paramID }}</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content> </ion-content>
+<ion-content>
+  <div>
+    <div>
+      <ion-icon
+        large
+        src="assets/icon/led.svg"
+        style="    height: 60px;
+    width: 100%;"
+      ></ion-icon>
+    </div>
+    <div>
+      <ion-row>
+        <ion-col text-center>
+          <ion-button (click)="turnOn()" class="ButtonDevice">
+            Turn on
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="turnOff()" class="ButtonDevice">
+            Turn off
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
 <ion-footer>
   <ion-row>
     <ion-col text-center>

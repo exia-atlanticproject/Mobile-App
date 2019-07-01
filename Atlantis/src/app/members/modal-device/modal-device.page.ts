@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ModalController } from "@ionic/angular";
 import { MetricsPage } from "../metrics/metrics.page";
 import { CommandPage } from "../command/command.page";
+import { CalculationPage } from "../calculation/calculation.page";
 import { Router } from "@angular/router";
 @Component({
   selector: "app-modal-device",
@@ -44,6 +45,16 @@ export class ModalDevicePage implements OnInit {
     });
     modal.present();
   }
+  async openModalCalculation() {
+    const modal = await this.modalController.create({
+      component: CalculationPage,
+      componentProps: {
+        paramID: 123
+      }
+    });
+    modal.present();
+  }
+
   openModalChart() {
     this.router.navigateByUrl("members/chart/" + this.paramData);
   }

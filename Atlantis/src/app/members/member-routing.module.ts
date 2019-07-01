@@ -28,7 +28,8 @@ const routes: Routes = [
     path: "previous-calculs/:calculationId",
     loadChildren:
       "./previous-calculs/previous-calculs.module#PreviousCalculsPageModule"
-  }
+  },  { path: 'calculation', loadChildren: './calculation/calculation.module#CalculationPageModule' }
+
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -13,6 +13,7 @@ import { ChartsModule } from "ng2-charts";
 import { ModalDevicePageModule } from "./members/modal-device/modal-device.module";
 import { MetricsPageModule } from "./members/metrics/metrics.module";
 import { CommandPageModule } from "./members/command/command.module";
+import { CalculationPageModule } from "./members/calculation/calculation.module";
 import { from } from "rxjs";
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { from } from "rxjs";
     ModalDevicePageModule,
     MetricsPageModule,
     CommandPageModule,
+    CalculationPageModule,
     IonicStorageModule.forRoot()
   ],
   exports: [ChartsModule],

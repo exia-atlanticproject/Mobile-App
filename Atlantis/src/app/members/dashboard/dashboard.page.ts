@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { DevicePage } from "./../device/device.page";
 import { NavController } from "@ionic/angular";
-import { Platform } from "ionic-angular";
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: "app-dashboard",
@@ -21,6 +21,6 @@ export class DashboardPage implements OnInit {
     this.navCtrl.navigateForward("members/calculed");
   }
   logout() {
-    this.platform.exitApp();
+    /* this.platform.exitApp();*/
   }
 }

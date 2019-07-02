@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { HTTP } from "@ionic-native/http/ngx";
+//import { HTTP } from "@ionic-native/http";
 import { NavController } from "@ionic/angular";
 
 @Component({
@@ -11,7 +11,7 @@ export class CalculedPage implements OnInit {
   dataReturned: any;
   private litsDevices: any;
   paramData;
-  constructor(private http: HTTP, public navCtrl: NavController) {
+  constructor(public navCtrl: NavController) {
     this.litsDevices = [
       {
         title: "Temp",
@@ -37,12 +37,12 @@ const { device } = await this.get("http://localhost:8090/devices", {}, {});
 console.log(device);
 */
   }
-  public get(url, params?: any, options: any = {}) {
+  /*public get(url, params?: any, options: any = {}) {
     const responseData = this.http
       .get(url, params, {})
       .then(resp =>
         options.responseType === "text" ? resp.data : JSON.parse(resp.data)
       );
     return responseData;
-  }
+  }*/
 }

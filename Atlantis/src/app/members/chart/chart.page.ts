@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Label } from "ng2-charts";
 import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import { ActivatedRoute } from "@angular/router";
-import { HTTP } from "@ionic-native/http/ngx";
+//import { HTTP } from "@ionic-native/http";
 
 @Component({
   selector: "app-chart",
@@ -42,7 +42,7 @@ export class ChartPage implements OnInit {
     { data: [65, 59, 80, 81, 56, 55, 10], label: "Series A" }
   ];
 
-  constructor(public activeRoute: ActivatedRoute, private http: HTTP) {}
+  constructor(public activeRoute: ActivatedRoute) {}
 
   async ngOnInit() {
     let deviceIdRecv = this.activeRoute.snapshot.paramMap.get("deviceId");
@@ -55,14 +55,14 @@ export class ChartPage implements OnInit {
     );*/
   }
 
-  public get(url, params?: any, options: any = {}) {
+  /* public get(url, params?: any, options: any = {}) {
     const responseData = this.http
       .get(url, params, {})
       .then(resp =>
         options.responseType === "text" ? resp.data : JSON.parse(resp.data)
       );
     return responseData;
-  }
+  }*/
 
   public chartClicked({
     event,

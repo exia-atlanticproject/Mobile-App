@@ -1,0 +1,32 @@
+.firstCircle {
+  width: 200px;
+  height: 210px;
+  --opacity: 1;
+  --border-radius: 50%;
+  padding-top: 10px;
+  --background: linear-gradient(
+    to right,
+    rgba(169, 3, 41, 1) 0%,
+    rgb(141, 143, 2) var(--firstColor),
+    rgb(2, 143, 61) var(--secondColor),
+    rgb(7, 0, 109) 100%
+  );
+
+  --color: black;
+}
+.secondCircle {
+  width: 180px;
+  height: 180px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  text-align: center;
+}
+.tempCircle {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+}

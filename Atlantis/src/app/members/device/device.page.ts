@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ModalDevicePage } from "../modal-device/modal-device.page";
 import { ModalController } from "@ionic/angular";
-import { HTTP } from "@ionic-native/http/ngx";
+//import { HTTP } from "@ionic-native/http";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-device",
@@ -13,7 +14,10 @@ export class DevicePage implements OnInit {
   private litsDevices: any;
   paramData;
 
-  constructor(private modalController: ModalController, private http: HTTP) {
+  constructor(
+    private modalController: ModalController,
+    private httpclient: HttpClient
+  ) {
     this.litsDevices = [
       {
         name: "Nancy",
@@ -24,6 +28,11 @@ export class DevicePage implements OnInit {
         id: 54
       }
     ];
+    this.httpclient
+      .get("http://192.168.0.24:8080/api/device/user/1")
+      .subscribe(response => {
+        console.log(response);
+      });
   }
   getDeviceByuser() {}
 
@@ -34,14 +43,14 @@ export class DevicePage implements OnInit {
     */
   }
 
-  public get(url, params?: any, options: any = {}) {
+  /*public get(url, params?: any, options: any = {}) {
     const responseData = this.http
       .get(url, params, {})
       .then(resp =>
         options.responseType === "text" ? resp.data : JSON.parse(resp.data)
       );
     return responseData;
-  }
+  }*/
 
   async openModal(title: string, dataD: string) {
     const modal = await this.modalController.create({

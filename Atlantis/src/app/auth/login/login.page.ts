@@ -1,12 +1,8 @@
 import { Component, NgZone, OnInit } from "@angular/core";
-import { NavController } from "@ionic/angular";
 import { Router } from "@angular/router";
-import axios from "axios";
-import {
-  InAppBrowser,
-  InAppBrowserObject
-} from "@ionic-native/in-app-browser/ngx";
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 import { HTTP } from "@ionic-native/http/ngx";
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: "app-login",
@@ -32,14 +28,19 @@ export class LoginPage implements OnInit {
     presentationstyle: "pagesheet"; // iOS only
     fullscreen: "yes"; // Windows only
   };
-  isConnected: boolean;
-  isLoading: false;
+
   constructor(
     private router: Router,
     private http: HTTP,
     private iab: InAppBrowser,
-    private ngZone: NgZone
-  ) {}
+    private ngZone: NgZone,
+    private platform: Platform
+  ) {
+    platform.ready().then(() => {
+      this.httpConnection();
+    });
+  }
+
   public get(url, params?: any, options: any = {}) {
     const responseData = this.http
       .get(url, params, {})
@@ -48,24 +49,17 @@ export class LoginPage implements OnInit {
       );
     return responseData;
   }
-  /*  public post(url, params?: any, options: any = {}) {
-    const responseData = this.http
-      .post(url, params, {})
-      .then(resp =>
-        options.responseType === "text" ? resp.data : JSON.parse(resp.data)
-      );
-    return responseData;
-  }*/
+
   async navigate() {
     await this.ngZone.run(
       async () => await this.router.navigateByUrl("/members/dashboard")
     );
   }
-
-  async ngOnInit() {
+  ngOnInit() {}
+  async httpConnection() {
     const target = "_self";
     let code: string = null;
-    const data = await this.get("http://localhost:8090/auth", {}, {});
+    const data = await this.get("http://10.154.128.142:8080/api/auth", {}, {});
     const browser = this.iab.create(data, target, "hideurlbar=yes");
     browser.on("loadstart").subscribe(async e => {
       if (e.url.indexOf("?code=") !== -1) {
@@ -73,14 +67,12 @@ export class LoginPage implements OnInit {
         browser.close();
 
         const { id_token } = await this.get(
-          "http://localhost:8090/login",
+          "http://10.154.128.142:8080/api/login",
           { code },
           {}
         );
 
         this.http.setHeader("localhost", "Authorization", `Bearer ${id_token}`);
-        this.isConnected = true;
-        this.isLoading = false;
         this.navigate();
       }
     });

@@ -19,14 +19,13 @@ export class MetricsPage implements OnInit {
   {}
 );*/
 
+    document.body.style.setProperty("--firstColor", "10%");
+    document.body.style.setProperty("--secondColor", "10%");
+
     this.listMetrics = [
       {
         metric: "Temp",
-        data: 98
-      },
-      {
-        metric: "Humidity",
-        data: 47
+        data: 31
       }
     ];
   }
@@ -35,6 +34,25 @@ export class MetricsPage implements OnInit {
     this.paramID;
     this.paramTitle;
     this.paramData;
+    if (this.listMetrics[0].data < -10) {
+      document.body.style.setProperty("--firstColor", "5%");
+      document.body.style.setProperty("--secondColor", "10%");
+    } else if (this.listMetrics[0].data <= 0) {
+      document.body.style.setProperty("--firstColor", "20%");
+      document.body.style.setProperty("--secondColor", "25%");
+    } else if (this.listMetrics[0].data < 10) {
+      document.body.style.setProperty("--firstColor", "35%");
+      document.body.style.setProperty("--secondColor", "40%");
+    } else if (this.listMetrics[0].data < 20) {
+      document.body.style.setProperty("--firstColor", "50%");
+      document.body.style.setProperty("--secondColor", "55%");
+    } else if (this.listMetrics[0].data < 30) {
+      document.body.style.setProperty("--firstColor", "65%");
+      document.body.style.setProperty("--secondColor", "70%");
+    } else if (this.listMetrics[0].data < 40) {
+      document.body.style.setProperty("--firstColor", "80%");
+      document.body.style.setProperty("--secondColor", "85%");
+    }
   }
 
   async closeModal() {

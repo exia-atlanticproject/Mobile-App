@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { HTTP } from "@ionic-native/http/ngx";
+//import { HTTP } from "@ionic-native/http";
 
 @Component({
   selector: "app-previous-calculs",
@@ -8,7 +8,7 @@ import { HTTP } from "@ionic-native/http/ngx";
   styleUrls: ["./previous-calculs.page.scss"]
 })
 export class PreviousCalculsPage implements OnInit {
-  constructor(public activeRoute: ActivatedRoute, private http: HTTP) {}
+  constructor(public activeRoute: ActivatedRoute) {}
 
   ngOnInit() {
     let deviceIdRecv = this.activeRoute.snapshot.paramMap.get("calculationId");

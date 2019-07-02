@@ -5,12 +5,17 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of listMetrics">
-      <h5>{{ item.metric }}</h5>
-      {{ item.data }}
-    </ion-item>
-  </ion-list>
+  <div *ngFor="let item of listMetrics">
+    <h5>{{ item.metric }}</h5>
+
+    <div style="text-align: -webkit-center; width: 100%;">
+      <ion-button disabled name="circle" class="firstCircle">
+        <div class="secondCircle">
+          <div class="tempCircle">{{ item.data }} °C</div>
+        </div>
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>
